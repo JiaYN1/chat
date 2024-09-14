@@ -1,1 +1,5 @@
 /build
+/server/GateServer/GateServer
+/server/GateServer/packages
+/server/GateServer/x64
+/server/GateServer/.vs
