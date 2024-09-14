@@ -14,6 +14,7 @@ RegisterDialog::RegisterDialog(QWidget *parent)
     repolish(ui->err_tip);
 
     // 连接信号
+    initHttpHandlers();
     connect(HttpMgr::GetInstance().get(), &HttpMgr::sig_reg_mod_finish, this, &RegisterDialog::slot_reg_mod_finish);
 }
 
@@ -41,7 +42,10 @@ void RegisterDialog::on_get_btn_clicked()
     bool match = regex.match(email).hasMatch();
     if(match){
         // 发送http请求获取验证码
-
+        QJsonObject json_obj;
+        json_obj["email"] = email;
+        HttpMgr::GetInstance()->PostHttpReq(QUrl(gate_url_prefix+"/get_varifycode"),
+                                            json_obj, ReqId::ID_GET_VARIFY_CODE, Modules::RESIGERMOD);
     }else{
         //
         showTip(tr("Wrong Email address"), false);

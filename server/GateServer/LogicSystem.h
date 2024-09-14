@@ -1,7 +1,5 @@
 #pragma once
 #include "Singleton.h"
-#include <functional>
-#include <map>
 #include "const.h"
 
 class HttpConnection; // 防止互相引用
@@ -13,7 +11,9 @@ class LogicSystem: public Singleton<LogicSystem>
 public:
 	~LogicSystem(){}
 	bool HandleGet(std::string, std::shared_ptr<HttpConnection>);
+	bool HandlePost(std::string, std::shared_ptr<HttpConnection>);
 	void RegGet(std::string, HttpHandler handler);
+	void RegPost(std::string, HttpHandler handler);
 private:
 	LogicSystem();
 	// key 路由 value 回调函数

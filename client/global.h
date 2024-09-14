@@ -9,6 +9,8 @@
 #include <QObject>
 #include <QJsonObject>
 #include <QJsonDocument>
+#include <QDir>
+#include <QSettings>
 
 /*
  * 刷新状态
@@ -29,5 +31,7 @@ enum ErrorCodes{
 enum Modules{
     RESIGERMOD = 0,
 };
+
+extern QString gate_url_prefix;
 
 #endif // GLOBAL_H

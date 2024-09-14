@@ -7,18 +7,49 @@
 #include <json/json.h>
 #include <json/value.h>
 #include <json/reader.h>
+#include "const.h"
+#include "CServer.h"
 
+/*
+* 初始化上下文iocontext以及启动信号监听ctr-c退出事件， 并且启动iocontext服务
+* 监听端口 CServer.Start:async_accept -> 
+  管理新链接 HttpConnection.Start:async_read 处理请求 HandleReq -> 
+  LogicSystem->GetInstance()->HandleGet(target, shared_ptr<HttpConnection>)
+*/
 int main()
 {
-    Json::Value root;
-    root["id"] = 1001;
-    root["data"] = "hello world";
-    std::string request = root.toStyledString();
-    std::cout << "request is " << request << std::endl;
+    try {
+        unsigned short port = static_cast<unsigned short>(8080);
+        net::io_context ioc{ 1 };
+        boost::asio::signal_set signals(ioc, SIGINT, SIGTERM); 
+        signals.async_wait([&ioc](const boost::system::error_code& err, int signal_number) {
+            if (err) {
+                return;
+            }
+            ioc.stop();
+        });
 
-    Json::Value root2;
-    Json::Reader reader;
-    reader.parse(request, root2);
-    std::cout << "msg id is " << root2["id"] << " msg is " << root2["data"] << std::endl;
+        std::make_shared<CServer>(ioc, port)->Start();
+        std::cout << "Gate Server listen on port: " << port << std::endl;
+        ioc.run();
+    }
+    catch (std::exception const& exc) {
+        std::cerr << "Error: " << exc.what() << std::endl;
+        return EXIT_FAILURE;
+    }
 }
 
+/*
+启动服务器，在浏览器输入`http://localhost:8080/get_test`
+
+会看到服务器回包`receive get_test req`
+
+如果我们输入带参数的url请求`http://localhost:8080/get_test?key1=value1&key2=value2`
+
+会收到服务器反馈`url not found`
+
+所以对于get请求带参数的情况我们要实现参数解析，我们可以自己实现简单的url解析函数
+
+*/
+
+// char -> 16进制 '0' = 48 '7' = 55 A = 65 a = 97
