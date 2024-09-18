@@ -3,3 +3,4 @@
 /server/GateServer/packages
 /server/GateServer/x64
 /server/GateServer/.vs
+/server/VerifyServer/node_modules

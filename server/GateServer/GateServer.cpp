@@ -20,8 +20,8 @@
 int main()
 {
     try {
-        ConfigMgr gCfgMgr;
-        std::string gate_port_str = gCfgMgr["GateServer"]["port"];
+        auto & gCfgMgr = ConfigMgr::Inst();
+        std::string gate_port_str = gCfgMgr["GateServer"]["Port"];
         unsigned short gate_port = atoi(gate_port_str.c_str());
         net::io_context ioc{ 1 };
         boost::asio::signal_set signals(ioc, SIGINT, SIGTERM); 

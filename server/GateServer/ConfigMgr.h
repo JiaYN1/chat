@@ -27,13 +27,18 @@ struct SectionInfo {
 class ConfigMgr
 {
 public:
-	ConfigMgr();
 	~ConfigMgr() {
 		_config_data.clear();
 	}
 	ConfigMgr(const ConfigMgr& src) {
 		_config_data = src._config_data;
 	}
+
+	static ConfigMgr& Inst() {
+		static ConfigMgr cfg;
+		return cfg;
+	}
+
 	ConfigMgr& operator=(const ConfigMgr& src) {
 		if (&src == this)
 			return *this;
@@ -47,6 +52,7 @@ public:
 		return _config_data[section];
 	}
 private:
+	ConfigMgr();
 	std::map <std::string, SectionInfo> _config_data;
 };
 
