@@ -16,7 +16,7 @@ GetVarifyRsp VarifyGrpcClient::GetVarifyCode(std::string email)
 	}
 	else {
 		pool_->returnConnection(std::move(stub));
-		reply.set_error(ErroeCodes::RPCFailed);
+		reply.set_error(ErrorCodes::RPCFailed);
 		return reply;
 	}
 }
