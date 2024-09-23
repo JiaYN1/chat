@@ -32,7 +32,7 @@ void TimerBtn::mouseReleaseEvent(QMouseEvent *e)
         this->setEnabled(false);
         this->setText(QString::number(_counter));
         _timer->start(1000);
-        emit click();
+        emit clicked();
     }
 
     QPushButton::mouseReleaseEvent(e);

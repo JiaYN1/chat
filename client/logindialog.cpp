@@ -7,10 +7,19 @@ LoginDialog::LoginDialog(QWidget *parent)
 {
     ui->setupUi(this);
     // 连接按钮点击事件
-    connect(ui->reg_btn, &QPushButton::clicked, this, &LoginDialog::switchResiter);
+    connect(ui->reg_btn, &QPushButton::clicked, this, &LoginDialog::switchRegister);
+    ui->forget_label->SetState("normal", "hover", "selected", "selected hover", "");
+    ui->forget_label->setCursor(Qt::PointingHandCursor);
+    connect(ui->forget_label, &ClickedLable::clicked, this, &LoginDialog::slot_forget_pwd);
 }
 
 LoginDialog::~LoginDialog()
 {
     delete ui;
+}
+
+void LoginDialog::slot_forget_pwd()
+{
+    qDebug() << "slot forget pwd";
+    emit switchReset();
 }

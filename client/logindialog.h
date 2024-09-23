@@ -18,8 +18,12 @@ public:
 private:
     Ui::LoginDialog *ui;
 
+private slots:
+    void slot_forget_pwd();
+
 signals:
-    void switchResiter();
+    void switchRegister();
+    void switchReset();
 };
 
 #endif // LOGINDIALOG_H
