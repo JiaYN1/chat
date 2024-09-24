@@ -30,6 +30,7 @@ enum ErrorCodes {
 	EmailNotMatch = 1007,	// 邮箱不匹配
 	PasswdUpFailed = 1008,	// 密码更新失败
 	PasswdInvalid = 1009,	// 更改密码失败
+	RPCGetFailed = 1010,
 };
 
 #define CODEPREFIX "code_"

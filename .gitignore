@@ -5,3 +5,7 @@
 /server/GateServer/x64
 /server/GateServer/.vs
 /server/VerifyServer/node_modules
+/server/StatusServer/StatusServer
+/server/StatusServer/packages
+/server/StatusServer/x64
+/server/StatusServer/.vs
