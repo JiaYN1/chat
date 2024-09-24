@@ -5,17 +5,19 @@
 #include "boost/uuid/random_generator.hpp"
 #include "boost/uuid/uuid_io.hpp"
 
-StatusServiceImpl::StatusServiceImpl():_server_index(0)
+StatusServiceImpl::StatusServiceImpl()
 {
 	auto& cfg = ConfigMgr::Inst();
 	ChatServer server;
 	server.port = cfg["ChatServer1"]["Port"];
 	server.host = cfg["ChatServer1"]["Host"];
-	_servers.push_back(server);
+	server.name = cfg["ChatServer1"]["Name"];
+	_servers[server.name] = server;
 
 	server.port = cfg["ChatServer2"]["Port"];
 	server.host = cfg["ChatServer2"]["Host"];
-	_servers.push_back(server);
+	server.name = cfg["ChatServer2"]["Name"];
+	_servers[server.name] = server;
 }
 
 StatusServiceImpl::~StatusServiceImpl()
@@ -33,11 +35,30 @@ std::string generate_unique_string() {
 Status StatusServiceImpl::GetChatServer(ServerContext* context, const GetChatServerReq* request, GetChatServerRsp* reply)
 {
 	std::string prefix("chat status server has received : ");
-	_server_index = (_server_index++) % (_servers.size());
-	auto& server = _servers[_server_index];
+	auto server = getChatServer();
 	reply->set_host(server.host);
 	reply->set_port(server.port);
 	reply->set_error(ErrorCodes::Success);
 	reply->set_token(generate_unique_string());
+	insertToken(request->uid(), reply->token());
 	return Status::OK;
+}
+
+void StatusServiceImpl::insertToken(int uid, std::string token)
+{
+	std::lock_guard<std::mutex> guard(_token_mtx);
+	_tokens[uid] = token;
+}
+
+ChatServer StatusServiceImpl::getChatServer()
+{
+	std::lock_guard<std::mutex> lock(_server_mtx);
+	auto minServer = _servers.begin()->second;
+	for (const auto& server : _servers) {
+		if (server.second.con_count < minServer.con_count) { // 找到连接数量最小的服务
+			minServer = server.second;
+		}
+	}
+
+	return minServer;
 }

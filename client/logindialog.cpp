@@ -20,6 +20,7 @@ LoginDialog::LoginDialog(QWidget *parent)
     // 连接登录回包信息
     connect(HttpMgr::GetInstance().get(), &HttpMgr::sig_login_mod_finish, this, &LoginDialog::slot_login_mod_finish);
 
+    ui->pass_edit->setEchoMode(QLineEdit::Password);
     ui->pass_visible->setCursor(Qt::PointingHandCursor);
     ui->pass_visible->SetState("unvisible","unvisible_hover","","visible",
                                "visible_hover","");
@@ -104,6 +105,7 @@ void LoginDialog::initHttpHandlers()
 {
     _handlers.insert(ReqId::ID_USER_LOGIN, [this](QJsonObject jsonObj){
         int error = jsonObj["error"].toInt();
+        qDebug() << "error is : " << error;
         if(error != ErrorCodes::SUCCESS){
             showTip(tr("参数错误"), false);
             return;
@@ -209,6 +211,7 @@ void LoginDialog::on_login_btn_clicked()
     QJsonObject jsonObj;
     jsonObj["user"] = user;
     jsonObj["passwd"] = xorString(pwd);
+    qDebug() << jsonObj["user"] << jsonObj["passwd"];
     HttpMgr::GetInstance()->PostHttpReq(QUrl(gate_url_prefix+"/user_login"), jsonObj,
                                         ReqId::ID_USER_LOGIN, Modules::LOGINMOD);
 }

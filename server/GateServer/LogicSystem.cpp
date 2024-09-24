@@ -223,8 +223,8 @@ LogicSystem::LogicSystem()
 		return true;
 	});
 
-	RegPost("user_login", [](std::shared_ptr<HttpConnection> connection) {
-		auto body_str = boost::beast::buffers_to_string(connection->_response.body().data());
+	RegPost("/user_login", [](std::shared_ptr<HttpConnection> connection) {
+		auto body_str = boost::beast::buffers_to_string(connection->_request.body().data());
 		std::cout << "receive body is " << body_str << std::endl;
 		connection->_response.set(http::field::content_type, "text/json");
 		Json::Value root;
@@ -268,6 +268,7 @@ LogicSystem::LogicSystem()
 		root["uid"] = userInfo.uid;
 		root["token"] = reply.token();
 		root["host"] = reply.host();
+		root["port"] = reply.port();
 		std::string jsonstr = root.toStyledString();
 		beast::ostream(connection->_response.body()) << jsonstr;
 		return true;
