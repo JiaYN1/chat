@@ -9,3 +9,7 @@
 /server/StatusServer/packages
 /server/StatusServer/x64
 /server/StatusServer/.vs
+/server/ChatServer/.vs
+/server/ChatServer/x64
+/server/ChatServer/packages
+/server/ChatServer/ChatServer

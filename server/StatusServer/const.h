@@ -31,6 +31,8 @@ enum ErrorCodes {
 	PasswdUpFailed = 1008,	// 密码更新失败
 	PasswdInvalid = 1009,	// 更改密码失败
 	RPCGetFailed = 1010,
+	TokenInvalid = 1011,   //Token失效
+	UidInvalid = 1012,  //uid无效
 };
 
 #define CODEPREFIX "code_"

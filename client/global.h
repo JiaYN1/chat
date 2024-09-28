@@ -24,6 +24,8 @@ enum ReqId{
     ID_REG_USER = 1002,         // 注册用户
     ID_RESET_PWD = 1003,        // 忘记密码
     ID_USER_LOGIN = 1004,       // 用户登录
+    ID_CHAT_LOGIN = 1005,       // 登录聊天服务器
+    ID_CHAT_LOGIN_RSP = 1006,   // 登录回包
 };
 
 enum ErrorCodes{
