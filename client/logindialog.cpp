@@ -231,7 +231,7 @@ void LoginDialog::slot_tcp_con_finish(bool bsuccess)
         showTip(tr("聊天服务连接成功，正在登录..."), true);
         QJsonObject jsonObj;
         jsonObj["uid"] = _uid;
-        jsonObj["tokne"] = _token;
+        jsonObj["token"] = _token;
 
         QJsonDocument doc(jsonObj);
         QString jsonStr = doc.toJson(QJsonDocument::Indented);
