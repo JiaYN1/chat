@@ -4,6 +4,7 @@
 #include <QDialog>
 #include "global.h"
 
+
 namespace Ui {
 class LoginDialog;
 }

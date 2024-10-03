@@ -10,12 +10,16 @@ class ClickedLable : public QLabel
 public:
     ClickedLable(QWidget *parent=nullptr);
     virtual void mousePressEvent(QMouseEvent *event) override;
+    virtual void mouseReleaseEvent(QMouseEvent *event) override;
     virtual void enterEvent(QEnterEvent* event) override;
     virtual void leaveEvent(QEvent* event) override;
     void SetState(QString normal="", QString hover="", QString press="",
                   QString select="", QString select_hover="", QString select_press="");
 
     ClickLbState GetCurState();
+
+    bool SetCurState(ClickLbState state);
+    void ResetNormalState();
 protected:
 
 private:
@@ -29,7 +33,7 @@ private:
 
     ClickLbState _curstate;
 signals:
-    void clicked(void);
+    void clicked(QString, ClickLbState);
 };
 
 #endif // CLICKEDLABLE_H
