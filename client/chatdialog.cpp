@@ -203,16 +203,16 @@ void ChatDialog::slot_side_contact()
 {
     qDebug()<< "receive side contact clicked";
     ClearLabelState(ui->side_contact_lb);
-    // //设置
-    // if(_last_widget == nullptr){
-    //     ui->stackedWidget->setCurrentWidget(ui->friend_apply_page);
-    //     _last_widget = ui->friend_apply_page;
-    // }else{
-    //     ui->stackedWidget->setCurrentWidget(_last_widget);
-    // }
+    //设置
+    if(_last_widget == nullptr){
+        ui->stackedWidget->setCurrentWidget(ui->friend_apply_page);
+        _last_widget = ui->friend_apply_page;
+    }else{
+        ui->stackedWidget->setCurrentWidget(_last_widget);
+    }
 
-    // _state = ChatUIMode::ContactMode;
-    // ShowSearch(false);
+    _state = ChatUIMode::ContactMode;
+    ShowSearch(false);
 }
 
 void ChatDialog::slot_text_changed(const QString &str)

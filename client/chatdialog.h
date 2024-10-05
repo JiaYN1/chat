@@ -27,6 +27,7 @@ private:
     ChatUIMode _mode;
     ChatUIMode _state;
     bool _b_loading;
+    QWidget* _last_widget;
     QList<StateWidget*> _lb_list;
     void ShowSearch(bool bsearch);
     void addChatUserList();
