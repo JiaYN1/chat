@@ -22,6 +22,13 @@ struct SectionInfo {
 			return "";
 		return _section_data[key];
 	}
+	std::string GetValue(const std::string& key) {
+		if (_section_data.find(key) == _section_data.end()) {
+			return "";
+		}
+		// 这里可以添加一些边界检查  
+		return _section_data[key];
+	}
 };
 
 class ConfigMgr
@@ -51,6 +58,7 @@ public:
 		}
 		return _config_data[section];
 	}
+	std::string GetValue(const std::string& section, const std::string& key);
 private:
 	ConfigMgr();
 	std::map <std::string, SectionInfo> _config_data;

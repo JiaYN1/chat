@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(TcpMgr::GetInstance().get(), &TcpMgr::sig_switch_chatdlg, this, &MainWindow::SlotSwitchChat);
 
 
-    emit TcpMgr::GetInstance().get()->sig_switch_chatdlg();
+    // emit TcpMgr::GetInstance().get()->sig_switch_chatdlg();
 }
 
 MainWindow::~MainWindow()

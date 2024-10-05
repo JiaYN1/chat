@@ -1,5 +1,14 @@
 #include "ConfigMgr.h"
 
+std::string ConfigMgr::GetValue(const std::string& section, const std::string& key)
+{
+	if (_config_data.find(section) == _config_data.end()) {
+		return "";
+	}
+
+	return _config_data[section].GetValue(key);
+}
+
 ConfigMgr::ConfigMgr()
 {
 	boost::filesystem::path current_path = boost::filesystem::current_path();

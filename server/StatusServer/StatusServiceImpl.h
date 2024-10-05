@@ -12,17 +12,20 @@ using message::LoginReq;
 using message::LoginRsp;
 using message::StatusService;
 
-struct ChatServer {
-	ChatServer():host(""), port(""), name(""), con_count(0) {}
+class  ChatServer {
+public:
+	ChatServer() :host(""), port(""), name(""), con_count(0) {}
 	ChatServer(const ChatServer& cs) :host(cs.host), port(cs.port), name(cs.name), con_count(cs.con_count) {}
 	ChatServer& operator=(const ChatServer& cs) {
 		if (&cs == this) {
 			return *this;
 		}
+
 		host = cs.host;
-		port = cs.port;
 		name = cs.name;
+		port = cs.port;
 		con_count = cs.con_count;
+		return *this;
 	}
 	std::string host;
 	std::string port;
@@ -43,8 +46,6 @@ private:
 	void insertToken(int uid, std::string token);
 	ChatServer getChatServer();
 	std::unordered_map<std::string, ChatServer> _servers;
-	std::unordered_map<int, std::string> _tokens;
 	std::mutex _server_mtx;
-	std::mutex _token_mtx;
 };
 

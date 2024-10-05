@@ -23,7 +23,7 @@ public:
 		: poolSize_(poolSize), host_(host), port_(port), b_stop_(false) {
 		for (size_t i = 0; i < poolSize_; ++i) {
 
-			std::shared_ptr<Channel> channel = grpc::CreateChannel(host + ":" + port,
+			std::shared_ptr<Channel> channel = grpc::CreateChannel(host_ + ":" + port_,
 				grpc::InsecureChannelCredentials());
 
 			connections_.push(StatusService::NewStub(channel));
