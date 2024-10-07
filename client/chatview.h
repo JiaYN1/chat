@@ -14,6 +14,7 @@ public:
     void appendChatItem(QWidget *item);
     void prependChatItem(QWidget *item);
     void insertChatItem(QWidget *before, QWidget *item);//中间插
+    void removeAllItem();
 protected:
     bool eventFilter(QObject *o, QEvent *e) override;
     void paintEvent(QPaintEvent *event) override;

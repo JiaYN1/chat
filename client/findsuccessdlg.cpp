@@ -43,7 +43,7 @@ void FindSuccessDlg::on_add_friend_btn_clicked()
    qDebug() << "click add friend";
    auto applyFriend = new ApplyFriend(_parent);
    qDebug() << "create applyfriend";
-   // applyFriend->SetSearchInfo(_si);
+   applyFriend->SetSearchInfo(_si);
    applyFriend->setModal(true);
    applyFriend->show();
 }

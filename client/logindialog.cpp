@@ -234,10 +234,10 @@ void LoginDialog::slot_tcp_con_finish(bool bsuccess)
         jsonObj["token"] = _token;
 
         QJsonDocument doc(jsonObj);
-        QString jsonStr = doc.toJson(QJsonDocument::Indented);
+        QByteArray jsonData = doc.toJson(QJsonDocument::Indented);
 
         // 发送tcp请求给chat server
-        TcpMgr::GetInstance()->sig_send_data(ReqId::ID_CHAT_LOGIN, jsonStr);
+        TcpMgr::GetInstance()->sig_send_data(ReqId::ID_CHAT_LOGIN, jsonData);
     }
     else{
         showTip(tr("网络异常"), false);

@@ -19,6 +19,7 @@ SOURCES += \
     applyfrienditem.cpp \
     applyfriendlist.cpp \
     applyfriendpage.cpp \
+    authenfriend.cpp \
     chatdialog.cpp \
     chatpage.cpp \
     chatuserlist.cpp \
@@ -32,6 +33,7 @@ SOURCES += \
     customizeedit.cpp \
     findfaildlg.cpp \
     findsuccessdlg.cpp \
+    friendinfopage.cpp \
     friendlabel.cpp \
     global.cpp \
     grouptipitem.cpp \
@@ -61,6 +63,7 @@ HEADERS += \
     applyfrienditem.h \
     applyfriendlist.h \
     applyfriendpage.h \
+    authenfriend.h \
     chatdialog.h \
     chatpage.h \
     chatuserlist.h \
@@ -74,6 +77,7 @@ HEADERS += \
     customizeedit.h \
     findfaildlg.h \
     findsuccessdlg.h \
+    friendinfopage.h \
     friendlabel.h \
     global.h \
     grouptipitem.h \
@@ -97,12 +101,14 @@ FORMS += \
     applyfriend.ui \
     applyfrienditem.ui \
     applyfriendpage.ui \
+    authenfriend.ui \
     chatdialog.ui \
     chatpage.ui \
     chatuserwid.ui \
     conuseritem.ui \
     findfaildlg.ui \
     findsuccessdlg.ui \
+    friendinfopage.ui \
     friendlabel.ui \
     grouptipitem.ui \
     loadingdlg.ui \
